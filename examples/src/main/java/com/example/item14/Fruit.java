@@ -8,6 +8,7 @@ public class Fruit implements Comparable<Fruit> {
     private int price;
     private int weight;
 
+
     public Fruit(String name, int price, int weight) {
         this.name = name;
         this.price = price;
