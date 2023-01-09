@@ -1,17 +1,41 @@
-
-import com.example.examples.Equals;
-import com.example.examples.Fruit;
+import com.example.item14.Fruit;
+import com.example.item14.Student;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Item14 {
+
+//        @Test
+//    void compareWithEqual() {
+//        Integer A = 1;
+//        System.out.println(A.equals(1.0));    // 타입에 관여하지 않고 일단 비교 진행
+//        System.out.println(A.compareTo(1.0)); // 타입이 서로 다르면 컴파일 단계에서 ClassCastException
+//    }
+
+    @Test
+    @DisplayName("String이 Comparable을 구현하여 자동으로 sort해준다")
+    void sort(){
+        String[] args = {"c","b","a"};
+        Set<String> s = new TreeSet<>();
+        Collections.addAll(s, args);
+        System.out.println(s);
+    }
+
+    @Test
+    @DisplayName("String이 Comparable을 구현하여 자동으로 sort해준다")
+    void sort2(){
+        HashSet<String> s = new HashSet<>();
+        s.add("da");
+        s.add("c");
+        s.add("b");
+        s.add("a");
+        System.out.println(s);
+    }
+
 
     @Test
     void compareToNum(){
@@ -51,10 +75,23 @@ public class Item14 {
     }
 
     @Test
-    void equalsTest(){
-        Set bigDecimalHashSet = new HashSet<>(); //HashSet에서는 equals를 이용한 동치 비교 : 정렬을 해주지 않는다 => 확인 방법?!
+    @DisplayName("equals와 동치성 결과가 다른 BigDecimal")
+    void BigDecimal(){
+        BigDecimal a = new BigDecimal("1.0");
+        BigDecimal b = new BigDecimal("1.00");
+
+        System.out.println(a.equals(b)); // false
+        System.out.println(a.compareTo(b)); // 0
+        System.out.println((a.compareTo(b) == 0) == a.equals(b)); // false
+    }
+    @Test
+    @DisplayName("equals와 동치성 결과가 같아야한다")
+    void 마지막_규약(){
+
+        Set bigDecimalHashSet = new HashSet<>(); //HashSet에서는 equals를 이용한 동치 비교
         bigDecimalHashSet.add(new BigDecimal("1.0")); // BigDecimal은 equals와 compareTo를 모두 사용한다.
         bigDecimalHashSet.add(new BigDecimal("1.00"));
+
 
         Set bigDecimalTreeSet = new TreeSet(); // TreeSet에서는 compareTo를 이용한 동치 비교
         bigDecimalTreeSet.add(new BigDecimal("1.0"));
@@ -67,40 +104,20 @@ public class Item14 {
         System.out.println(new BigDecimal("1.0").compareTo(new BigDecimal("1.00"))); // 0 서로 같은 객체로 인식
     }
 
-//    @Test
-//    void compareWithEqual() {
-//        Integer A = 1;
-//        System.out.println(A.equals(1.0));    // 타입에 관여하지 않고 일단 비교 진행
-//        System.out.println(A.compareTo(1.0)); // 타입이 서로 다르면 컴파일 단계에서 ClassCastException
-//    }
-
     @Test
-    void compareToMessage(){
-        String str = "abcd";
+    @DisplayName("compareTo를 구현하지 않은 경우 => Comparator 사용 ")
+    void Comparator_test(){
+       Student student1 = new Student("first",10);
+        Student student2 = new Student("second",15);
 
-        // 1) 비교대상에 문자열이 포함되어있을 경우
-        System.out.println( str.compareTo("abcd") );  // 0 (같은 경우는 숫자나 문자나 0을 리턴)
-        System.out.println( str.compareTo("ab") );  //  2
-        System.out.println( str.compareTo("a") );  //  3
-        System.out.println( str.compareTo("c") );  //  -2
-        System.out.println( "".compareTo(str) );  //  -4
+        List<Student> studentList = Arrays.asList(student1,student2);
 
-        // 2) 비교대상과 전혀 다른 문자열인 경우
-        System.out.println( str.compareTo("zefd") );  //  -25
-        System.out.println( str.compareTo("zEFd") );  //  -25
-        System.out.println( str.compareTo("ABCD") );  //  32
-    }
-    @Test
-    @DisplayName("String이 Comparable을 구현하여 자동으로 sort해준다")
-    void sort(){
-        String[] args = {"c","b","a"};
-        Set<String> s = new TreeSet<>();
-        Collections.addAll(s, args);
-        System.out.println(s);
+        studentList.stream().sorted((Comparator.comparing(Student::getAge)))
+            .forEach(System.out::println);
     }
 
     @Test
-    @DisplayName("compareTo 수행 시간 비교")
+    @DisplayName("compareTo 방식에 따른 수행 시간 비교")
     void 수행시간비교(){
         long start = System.currentTimeMillis();
         Fruit fruit = new Fruit("사과",1000,10);
