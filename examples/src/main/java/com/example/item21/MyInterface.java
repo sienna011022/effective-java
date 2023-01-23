@@ -4,4 +4,6 @@ public interface MyInterface {
     default String printHello(){
         return "Hello World";
     }
+
+    String hello();
 }
