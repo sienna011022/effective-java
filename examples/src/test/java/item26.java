@@ -45,8 +45,8 @@ public class item26 {
 
     private static void wildCardTypeMethod(final List<?> stringCollection) {
         stringCollection.get(0);
-        stringCollection.add(1); // 컴파일 에러
-       stringCollection.add("1"); // 컴파일 에러
+//        stringCollection.add(1); // 컴파일 에러
+//      stringCollection.add("1"); // 컴파일 에러
     }
 
 }
