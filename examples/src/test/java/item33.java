@@ -11,11 +11,10 @@ public class item33 {
     @Test
     void 타입_설정_제한() {
         //나는 키나 값에 여러개의 타입을 넣고 싶은데,,,
-
         Map<Integer, String> example = new HashMap<>();
         example.put(1234, "1234");
         //컴파일 에러
-        example.put("1234",1234);
+        //example.put("1234",1234);
     }
 
     @Test

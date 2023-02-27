@@ -1,6 +1,6 @@
 ## item 33 - 타입 안전 이종 컨테이너를 고려하라
 
-* 타입 안전 이종 컨테이너란? Typesafe heterogeneous
+* 타입 안전 이종 컨테이너란? Typesafe heterogeneous<br>
 Continer = 객체의 리스트 
 <br> 원래는 하나의 컨테이너에 타입이 한정되어있었다. <br> ex) Set - 1개의 타입 ,Map - 2개의 타입
 
@@ -65,7 +65,7 @@ cast 메서드의 시그니처 클래스가 제너릭이다.
 3. 
    즐겨찾는 String이나 String[]은 넣을 수 있어도 List<String> 은 넣을 수 없다.<br> 
 List<String> 용 Class를 얻을 수 없기 때문이다.<br>
-   .List<String>.class와 List<Integer>.class는 결국 List.class를 공유하므로 둘 다 똑같은 타입의 객체 참조를 반환하기 때문이다
+   .List< String >.class와 List< Integer >.class는 결국 List.class를 공유하므로 둘 다 똑같은 타입의 객체 참조를 반환하기 때문이다
 ----
 어쨋든 Favorites(타입 이중 컨테이너)는 유연하다.
 이 메서드들의 타입을 제한하고 싶다면? => 한정적 타입 토큰을 이용해보자.
@@ -79,3 +79,4 @@ assubclass 메서드 <br>
 >키를 타입 그 자체로 하고 싶다면 타입 이종 컨테이너를 사용해보세요
 cast를 사용한다면 value와 key의 연결성도 보장해줄 수 있습니다.
 키를 타입 그 자체로 사용하는 방식을 타입 토큰이라고 합니다
+https://datacadamia.com/code/design_pattern/typesafe_heterogeneous_container
