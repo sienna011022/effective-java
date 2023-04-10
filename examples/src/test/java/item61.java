@@ -14,12 +14,14 @@ public class item61 {
 
     @Test
     void 비교자_에러() {
-        Integer wrapped = Integer.valueOf(3);
-        Integer wrapped2 = Integer.valueOf(3);
-        wrapped.compareTo(wrapped2);
+        Integer wrapped = new Integer(3);
+        Integer wrapped2 = new Integer(3);
 
         //왜 같다고 하지..?
         Assertions.assertThat(wrapped == wrapped2).isEqualTo(false);
     }
+    //캐싱 문제
+
+    System
 
 }
